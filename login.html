@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta name="theme-color" content="#070910">
+
   <title>BT Mike - Login</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -16,26 +20,35 @@
 
     body {
       min-height: 100vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
 
-      font-family: Arial, sans-serif;
+      padding: 20px;
+
+      font-family:
+        Arial,
+        sans-serif;
+
       color: white;
 
       background:
         radial-gradient(
-          circle at top left,
+          circle at 20% 10%,
           rgba(108,99,255,.25),
           transparent 35%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(37,217,139,.10),
+          transparent 30%
         ),
         linear-gradient(
           135deg,
           #05060b,
           #0b1020
         );
-
-      padding: 20px;
     }
 
     .login-card {
@@ -44,30 +57,36 @@
 
       padding: 35px;
 
-      border-radius: 25px;
+      border-radius: 26px;
 
-      background: rgba(18,23,38,.80);
+      background:
+        rgba(18,23,38,.82);
 
-      border: 1px solid rgba(255,255,255,.1);
+      border:
+        1px solid
+        rgba(255,255,255,.10);
 
-      backdrop-filter: blur(20px);
+      backdrop-filter:
+        blur(20px);
 
       box-shadow:
-        0 25px 80px rgba(0,0,0,.45);
+        0 30px 80px
+        rgba(0,0,0,.5);
     }
 
     .logo {
-      width: 60px;
-      height: 60px;
+      width: 65px;
+      height: 65px;
 
-      margin: 0 auto 18px;
+      margin:
+        0 auto 18px;
 
       display: grid;
       place-items: center;
 
-      border-radius: 18px;
+      border-radius: 19px;
 
-      font-size: 28px;
+      font-size: 30px;
 
       background:
         linear-gradient(
@@ -75,38 +94,52 @@
           #6c63ff,
           #9a73ff
         );
+
+      box-shadow:
+        0 15px 35px
+        rgba(108,99,255,.35);
     }
 
     h1 {
       text-align: center;
+
       font-size: 30px;
+
       margin-bottom: 8px;
     }
 
     .subtitle {
       text-align: center;
+
       color: #8d96aa;
+
       font-size: 14px;
+
+      line-height: 1.5;
+
       margin-bottom: 28px;
     }
 
     .tabs {
       display: grid;
-      grid-template-columns: 1fr 1fr;
 
-      gap: 8px;
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 6px;
 
       padding: 5px;
 
-      border-radius: 12px;
+      border-radius: 13px;
 
-      background: rgba(255,255,255,.05);
+      background:
+        rgba(255,255,255,.05);
 
       margin-bottom: 22px;
     }
 
     .tab {
-      padding: 11px;
+      padding: 12px;
 
       border: none;
 
@@ -128,15 +161,15 @@
     }
 
     .input-group {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
 
-      font-size: 12px;
-
       color: #aab1c2;
+
+      font-size: 12px;
 
       margin-bottom: 7px;
     }
@@ -148,13 +181,16 @@
 
       border-radius: 11px;
 
-      border: 1px solid rgba(255,255,255,.1);
+      outline: none;
 
-      background: rgba(0,0,0,.25);
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      background:
+        rgba(0,0,0,.25);
 
       color: white;
-
-      outline: none;
 
       font-size: 14px;
     }
@@ -169,6 +205,7 @@
 
     .phone-row {
       display: flex;
+
       gap: 8px;
     }
 
@@ -185,19 +222,11 @@
 
       padding: 14px;
 
-      margin-top: 5px;
-
       border: none;
 
       border-radius: 12px;
 
       color: white;
-
-      font-size: 15px;
-
-      font-weight: bold;
-
-      cursor: pointer;
 
       background:
         linear-gradient(
@@ -206,63 +235,75 @@
           #817aff
         );
 
-      box-shadow:
-        0 10px 25px
-        rgba(108,99,255,.25);
+      font-size: 14px;
+
+      font-weight: bold;
+
+      cursor: pointer;
+
+      transition: .2s;
     }
 
     .main-btn:hover {
-      transform: translateY(-1px);
+      transform:
+        translateY(-1px);
+    }
+
+    .secondary-btn {
+      margin-top: 10px;
+
+      background:
+        rgba(255,255,255,.07);
     }
 
     .message {
       display: none;
 
-      padding: 12px;
-
       margin-top: 15px;
+
+      padding: 12px;
 
       border-radius: 10px;
 
+      text-align: center;
+
       font-size: 13px;
 
-      text-align: center;
+      line-height: 1.4;
     }
 
-    .error {
+    .message.error {
       display: block;
 
       color: #ff8297;
 
-      background: rgba(255,85,113,.1);
+      background:
+        rgba(255,85,113,.10);
     }
 
-    .success {
+    .message.success {
       display: block;
 
       color: #51e6a3;
 
-      background: rgba(37,217,139,.1);
-    }
-
-    #recaptcha-container {
-      margin: 15px 0;
+      background:
+        rgba(37,217,139,.10);
     }
 
     .hidden {
-      display: none;
+      display: none !important;
     }
 
     .back {
       display: block;
 
-      text-align: center;
-
       margin-top: 22px;
 
-      color: #8d96aa;
+      text-align: center;
 
       text-decoration: none;
+
+      color: #8d96aa;
 
       font-size: 13px;
     }
@@ -271,13 +312,27 @@
       color: white;
     }
 
+    #recaptcha-container {
+      margin:
+        12px 0;
+    }
+
     @media (max-width: 450px) {
+
       .login-card {
         padding: 25px 20px;
       }
+
+      h1 {
+        font-size: 26px;
+      }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
@@ -287,7 +342,9 @@
       🎙️
     </div>
 
-    <h1>Welcome to BT Mike</h1>
+    <h1>
+      Welcome to BT Mike
+    </h1>
 
     <p class="subtitle">
       Login to use your wireless microphone
@@ -301,7 +358,6 @@
       <button
         id="emailTab"
         class="tab active"
-        onclick="showEmail()"
       >
         📧 Email
       </button>
@@ -309,7 +365,6 @@
       <button
         id="phoneTab"
         class="tab"
-        onclick="showPhone()"
       >
         📱 Mobile
       </button>
@@ -317,18 +372,23 @@
     </div>
 
 
-    <!-- EMAIL LOGIN -->
+    <!-- =========================
+         EMAIL
+         ========================= -->
 
     <div id="emailSection">
 
       <div class="input-group">
 
-        <label>Email Address</label>
+        <label>
+          Email Address
+        </label>
 
         <input
           type="email"
           id="email"
           placeholder="you@example.com"
+          autocomplete="email"
         >
 
       </div>
@@ -336,40 +396,41 @@
 
       <div class="input-group">
 
-        <label>Password</label>
+        <label>
+          Password
+        </label>
 
         <input
           type="password"
           id="password"
           placeholder="Enter password"
+          autocomplete="current-password"
         >
 
       </div>
 
 
       <button
+        id="loginEmailBtn"
         class="main-btn"
-        onclick="emailLogin()"
       >
         🔐 Login with Email
       </button>
 
 
       <button
-        class="main-btn"
-        style="
-          margin-top:10px;
-          background:rgba(255,255,255,.07);
-        "
-        onclick="emailSignup()"
+        id="signupEmailBtn"
+        class="main-btn secondary-btn"
       >
-        📝 Create Account
+        📝 Create New Account
       </button>
 
     </div>
 
 
-    <!-- PHONE LOGIN -->
+    <!-- =========================
+         PHONE
+         ========================= -->
 
     <div
       id="phoneSection"
@@ -378,22 +439,25 @@
 
       <div class="input-group">
 
-        <label>Mobile Number</label>
+        <label>
+          Mobile Number
+        </label>
 
         <div class="phone-row">
 
           <input
-            class="country-code"
             id="countryCode"
+            class="country-code"
             value="+91"
-            placeholder="+91"
+            type="text"
           >
 
           <input
-            class="phone-number"
             id="phone"
+            class="phone-number"
             type="tel"
             placeholder="9876543210"
+            autocomplete="tel"
           >
 
         </div>
@@ -405,8 +469,8 @@
 
 
       <button
+        id="sendOtpBtn"
         class="main-btn"
-        onclick="sendOTP()"
       >
         📲 Send OTP
       </button>
@@ -415,26 +479,31 @@
       <div
         id="otpSection"
         class="hidden"
-        style="margin-top:15px;"
       >
 
-        <div class="input-group">
+        <div
+          class="input-group"
+          style="margin-top:15px;"
+        >
 
-          <label>Enter OTP</label>
+          <label>
+            Enter OTP
+          </label>
 
           <input
             id="otp"
             type="text"
+            inputmode="numeric"
             maxlength="6"
-            placeholder="123456"
+            placeholder="6 digit OTP"
           >
 
         </div>
 
 
         <button
+          id="verifyOtpBtn"
           class="main-btn"
-          onclick="verifyOTP()"
         >
           ✅ Verify OTP
         </button>
@@ -460,7 +529,9 @@
   </div>
 
 
-  <!-- FIREBASE -->
+  <!-- =========================
+       FIREBASE
+       ========================= -->
 
   <script type="module">
 
@@ -475,20 +546,22 @@
       signInWithEmailAndPassword,
       createUserWithEmailAndPassword,
       signInWithPhoneNumber,
-      RecaptchaVerifier
+      RecaptchaVerifier,
+      onAuthStateChanged
     } from
     "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
 
 
     /*
     =====================================================
-    PASTE YOUR FIREBASE CONFIG HERE
+    🔥 PASTE YOUR FIREBASE CONFIG HERE
     =====================================================
     */
 
     const firebaseConfig = {
 
-      apiKey: "YOUR_API_KEY",
+      apiKey:
+        "YOUR_API_KEY",
 
       authDomain:
         "YOUR_PROJECT.firebaseapp.com",
@@ -509,15 +582,117 @@
 
 
     /*
-    Initialize Firebase
+    =====================================================
+    INITIALIZE FIREBASE
+    =====================================================
     */
 
     const app =
       initializeApp(firebaseConfig);
 
-
     const auth =
       getAuth(app);
+
+
+    /*
+    =====================================================
+    ELEMENTS
+    =====================================================
+    */
+
+    const emailTab =
+      document.getElementById("emailTab");
+
+    const phoneTab =
+      document.getElementById("phoneTab");
+
+    const emailSection =
+      document.getElementById("emailSection");
+
+    const phoneSection =
+      document.getElementById("phoneSection");
+
+    const message =
+      document.getElementById("message");
+
+
+    /*
+    =====================================================
+    IF ALREADY LOGGED IN
+    =====================================================
+    */
+
+    onAuthStateChanged(
+      auth,
+      (user) => {
+
+        if (user) {
+
+          window.location.href =
+            "index.html";
+
+        }
+
+      }
+    );
+
+
+    /*
+    =====================================================
+    EMAIL / PHONE TABS
+    =====================================================
+    */
+
+    emailTab.addEventListener(
+      "click",
+      () => {
+
+        emailTab.classList.add(
+          "active"
+        );
+
+        phoneTab.classList.remove(
+          "active"
+        );
+
+        emailSection.classList.remove(
+          "hidden"
+        );
+
+        phoneSection.classList.add(
+          "hidden"
+        );
+
+        clearMessage();
+
+      }
+    );
+
+
+    phoneTab.addEventListener(
+      "click",
+      () => {
+
+        phoneTab.classList.add(
+          "active"
+        );
+
+        emailTab.classList.remove(
+          "active"
+        );
+
+        phoneSection.classList.remove(
+          "hidden"
+        );
+
+        emailSection.classList.add(
+          "hidden"
+        );
+
+        clearMessage();
+
+      }
+    );
 
 
     /*
@@ -526,134 +701,160 @@
     =====================================================
     */
 
-    window.emailLogin = async function () {
+    document
+      .getElementById("loginEmailBtn")
+      .addEventListener(
+        "click",
+        async () => {
 
-      const email =
-        document.getElementById("email").value.trim();
+          const email =
+            document
+              .getElementById("email")
+              .value
+              .trim();
 
-      const password =
-        document.getElementById("password").value;
-
-
-      if (!email || !password) {
-
-        showMessage(
-          "Please enter email and password.",
-          "error"
-        );
-
-        return;
-
-      }
+          const password =
+            document
+              .getElementById("password")
+              .value;
 
 
-      try {
+          if (!email || !password) {
 
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+            showMessage(
+              "Please enter email and password.",
+              "error"
+            );
 
+            return;
 
-        showMessage(
-          "Login successful! Redirecting...",
-          "success"
-        );
+          }
 
 
-        setTimeout(() => {
+          try {
 
-          window.location.href =
-            "index.html";
+            await signInWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
 
-        }, 1000);
+
+            showMessage(
+              "Login successful! Opening BT Mike...",
+              "success"
+            );
 
 
-      } catch (error) {
+            setTimeout(
+              () => {
 
-        showMessage(
-          getFirebaseError(error),
-          "error"
-        );
+                window.location.href =
+                  "index.html";
 
-      }
+              },
+              800
+            );
 
-    };
+
+          } catch (error) {
+
+            showMessage(
+              firebaseError(error),
+              "error"
+            );
+
+          }
+
+        }
+      );
 
 
     /*
     =====================================================
-    EMAIL SIGN UP
+    CREATE ACCOUNT
     =====================================================
     */
 
-    window.emailSignup = async function () {
+    document
+      .getElementById("signupEmailBtn")
+      .addEventListener(
+        "click",
+        async () => {
 
-      const email =
-        document.getElementById("email").value.trim();
+          const email =
+            document
+              .getElementById("email")
+              .value
+              .trim();
 
-      const password =
-        document.getElementById("password").value;
-
-
-      if (!email || !password) {
-
-        showMessage(
-          "Please enter email and password.",
-          "error"
-        );
-
-        return;
-
-      }
+          const password =
+            document
+              .getElementById("password")
+              .value;
 
 
-      if (password.length < 6) {
+          if (!email || !password) {
 
-        showMessage(
-          "Password must contain at least 6 characters.",
-          "error"
-        );
+            showMessage(
+              "Please enter email and password.",
+              "error"
+            );
 
-        return;
+            return;
 
-      }
-
-
-      try {
-
-        await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
+          }
 
 
-        showMessage(
-          "Account created successfully!",
-          "success"
-        );
+          if (password.length < 6) {
+
+            showMessage(
+              "Password must be at least 6 characters.",
+              "error"
+            );
+
+            return;
+
+          }
 
 
-        setTimeout(() => {
+          try {
 
-          window.location.href =
-            "index.html";
+            await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            );
 
-        }, 1000);
+
+            showMessage(
+              "Account created successfully!",
+              "success"
+            );
 
 
-      } catch (error) {
+            setTimeout(
+              () => {
 
-        showMessage(
-          getFirebaseError(error),
-          "error"
-        );
+                window.location.href =
+                  "index.html";
 
-      }
+              },
+              800
+            );
 
-    };
+
+          } catch (error) {
+
+            showMessage(
+              firebaseError(error),
+              "error"
+            );
+
+          }
+
+        }
+      );
 
 
     /*
@@ -662,81 +863,103 @@
     =====================================================
     */
 
-    let confirmationResult;
+    let confirmationResult = null;
+
+    let recaptchaVerifier = null;
 
 
-    window.sendOTP = async function () {
+    document
+      .getElementById("sendOtpBtn")
+      .addEventListener(
+        "click",
+        async () => {
 
-      const country =
-        document.getElementById("countryCode")
-          .value.trim();
+          const country =
+            document
+              .getElementById("countryCode")
+              .value
+              .trim();
 
-      const phone =
-        document.getElementById("phone")
-          .value.trim();
-
-
-      if (!phone) {
-
-        showMessage(
-          "Please enter your mobile number.",
-          "error"
-        );
-
-        return;
-
-      }
+          const phone =
+            document
+              .getElementById("phone")
+              .value
+              .trim();
 
 
-      const fullPhone =
-        country + phone;
+          if (!phone) {
 
-
-      try {
-
-        if (!window.recaptchaVerifier) {
-
-          window.recaptchaVerifier =
-            new RecaptchaVerifier(
-              auth,
-              "recaptcha-container",
-              {
-                size: "normal"
-              }
+            showMessage(
+              "Please enter your mobile number.",
+              "error"
             );
 
+            return;
+
+          }
+
+
+          const fullPhone =
+            country + phone;
+
+
+          try {
+
+            /*
+              Create reCAPTCHA
+            */
+
+            if (!recaptchaVerifier) {
+
+              recaptchaVerifier =
+                new RecaptchaVerifier(
+                  auth,
+                  "recaptcha-container",
+                  {
+                    size: "normal"
+                  }
+                );
+
+              await recaptchaVerifier.render();
+
+            }
+
+
+            /*
+              Send OTP
+            */
+
+            confirmationResult =
+              await signInWithPhoneNumber(
+                auth,
+                fullPhone,
+                recaptchaVerifier
+              );
+
+
+            document
+              .getElementById("otpSection")
+              .classList.remove(
+                "hidden"
+              );
+
+
+            showMessage(
+              "OTP sent successfully.",
+              "success"
+            );
+
+          } catch (error) {
+
+            showMessage(
+              firebaseError(error),
+              "error"
+            );
+
+          }
+
         }
-
-
-        confirmationResult =
-          await signInWithPhoneNumber(
-            auth,
-            fullPhone,
-            window.recaptchaVerifier
-          );
-
-
-        document
-          .getElementById("otpSection")
-          .classList.remove("hidden");
-
-
-        showMessage(
-          "OTP sent successfully.",
-          "success"
-        );
-
-
-      } catch (error) {
-
-        showMessage(
-          getFirebaseError(error),
-          "error"
-        );
-
-      }
-
-    };
+      );
 
 
     /*
@@ -745,82 +968,98 @@
     =====================================================
     */
 
-    window.verifyOTP = async function () {
+    document
+      .getElementById("verifyOtpBtn")
+      .addEventListener(
+        "click",
+        async () => {
 
-      const otp =
-        document.getElementById("otp")
-          .value.trim();
-
-
-      if (!confirmationResult) {
-
-        showMessage(
-          "Please request an OTP first.",
-          "error"
-        );
-
-        return;
-
-      }
+          const otp =
+            document
+              .getElementById("otp")
+              .value
+              .trim();
 
 
-      if (!otp) {
+          if (!confirmationResult) {
 
-        showMessage(
-          "Please enter the OTP.",
-          "error"
-        );
+            showMessage(
+              "Please request an OTP first.",
+              "error"
+            );
 
-        return;
+            return;
 
-      }
-
-
-      try {
-
-        await confirmationResult.confirm(
-          otp
-        );
+          }
 
 
-        showMessage(
-          "Phone verified! Redirecting...",
-          "success"
-        );
+          if (!otp) {
+
+            showMessage(
+              "Please enter the OTP.",
+              "error"
+            );
+
+            return;
+
+          }
 
 
-        setTimeout(() => {
+          try {
 
-          window.location.href =
-            "index.html";
+            await confirmationResult.confirm(
+              otp
+            );
 
-        }, 1000);
+
+            showMessage(
+              "Phone verified! Opening BT Mike...",
+              "success"
+            );
 
 
-      } catch (error) {
+            setTimeout(
+              () => {
 
-        showMessage(
-          "Invalid OTP. Please try again.",
-          "error"
-        );
+                window.location.href =
+                  "index.html";
 
-      }
+              },
+              800
+            );
 
-    };
+
+          } catch (error) {
+
+            showMessage(
+              "Invalid OTP. Please check the OTP and try again.",
+              "error"
+            );
+
+          }
+
+        }
+      );
 
 
     /*
     =====================================================
-    FIREBASE ERROR MESSAGE
+    ERROR HANDLING
     =====================================================
     */
 
-    function getFirebaseError(error) {
+    function firebaseError(error) {
 
       switch (error.code) {
 
         case "auth/invalid-credential":
           return "Invalid email or password.";
+
+        case "auth/user-not-found":
+          return "No account found with this email.";
+
+        case "auth/wrong-password":
+          return "Incorrect password.";
 
         case "auth/email-already-in-use":
           return "This email is already registered.";
@@ -829,7 +1068,7 @@
           return "Please enter a valid email address.";
 
         case "auth/weak-password":
-          return "Password is too weak.";
+          return "Password must contain at least 6 characters.";
 
         case "auth/too-many-requests":
           return "Too many attempts. Please try again later.";
@@ -838,10 +1077,17 @@
           return "Invalid mobile number.";
 
         case "auth/quota-exceeded":
-          return "OTP limit exceeded. Try again later.";
+          return "OTP limit exceeded. Please try again later.";
+
+        case "auth/operation-not-allowed":
+          return "This login method is not enabled in Firebase.";
+
+        case "auth/unauthorized-domain":
+          return "This website domain is not authorized in Firebase.";
 
         default:
-          return error.message || "Something went wrong.";
+          return error.message ||
+            "Something went wrong.";
 
       }
 
@@ -854,73 +1100,31 @@
     =====================================================
     */
 
-    function showMessage(text, type) {
+    function showMessage(
+      text,
+      type
+    ) {
 
-      const box =
-        document.getElementById("message");
+      message.innerText =
+        text;
 
-      box.innerText = text;
-
-      box.className =
+      message.className =
         "message " + type;
 
     }
 
-  </script>
 
+    function clearMessage() {
 
-  <script>
+      message.innerText = "";
 
-    /*
-    =====================================================
-    SWITCH EMAIL / PHONE
-    =====================================================
-    */
-
-    function showEmail() {
-
-      document
-        .getElementById("emailSection")
-        .classList.remove("hidden");
-
-      document
-        .getElementById("phoneSection")
-        .classList.add("hidden");
-
-
-      document
-        .getElementById("emailTab")
-        .classList.add("active");
-
-      document
-        .getElementById("phoneTab")
-        .classList.remove("active");
-
-    }
-
-
-    function showPhone() {
-
-      document
-        .getElementById("emailSection")
-        .classList.add("hidden");
-
-      document
-        .getElementById("phoneSection")
-        .classList.remove("hidden");
-
-
-      document
-        .getElementById("emailTab")
-        .classList.remove("active");
-
-      document
-        .getElementById("phoneTab")
-        .classList.add("active");
+      message.className =
+        "message";
 
     }
 
   </script>
 
 </body>
+
 </html>
