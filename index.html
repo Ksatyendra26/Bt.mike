@@ -1,18 +1,10 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#080b14"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b14">
 
   <title>BT Mike — Wireless Microphone</title>
 
@@ -39,6 +31,7 @@
 
     body {
       min-height: 100vh;
+
       font-family:
         Inter,
         -apple-system,
@@ -71,13 +64,14 @@
       overflow-x: hidden;
     }
 
-    /* Ambient background */
-
     body::before {
       content: "";
+
       position: fixed;
+
       width: 500px;
       height: 500px;
+
       left: -250px;
       bottom: -250px;
 
@@ -92,9 +86,12 @@
 
     body::after {
       content: "";
+
       position: fixed;
+
       width: 400px;
       height: 400px;
+
       right: -200px;
       top: -200px;
 
@@ -107,26 +104,35 @@
       pointer-events: none;
     }
 
-    /* Navbar */
+    /* =========================
+       NAVBAR
+       ========================= */
 
     nav {
       width: min(1100px, 92%);
+
       margin: auto;
 
       height: 80px;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
     }
 
     .brand {
       display: flex;
+
       align-items: center;
+
       gap: 12px;
 
       font-weight: 800;
+
       font-size: 20px;
+
       letter-spacing: -.5px;
     }
 
@@ -135,6 +141,7 @@
       height: 42px;
 
       display: grid;
+
       place-items: center;
 
       border-radius: 13px;
@@ -154,10 +161,13 @@
 
     .nav-status {
       display: flex;
+
       align-items: center;
+
       gap: 8px;
 
       color: var(--muted);
+
       font-size: 13px;
     }
 
@@ -173,21 +183,31 @@
         0 0 12px rgba(37,217,139,.8);
     }
 
-    /* Main */
+    /* =========================
+       MAIN
+       ========================= */
 
     main {
       width: min(1100px, 92%);
+
       margin: 25px auto 60px;
     }
 
+    /* =========================
+       HERO
+       ========================= */
+
     .hero {
       text-align: center;
+
       margin-bottom: 35px;
     }
 
     .badge {
       display: inline-flex;
+
       align-items: center;
+
       gap: 7px;
 
       padding: 8px 14px;
@@ -201,6 +221,7 @@
       color: #b9b5ff;
 
       font-size: 12px;
+
       font-weight: 600;
 
       margin-bottom: 18px;
@@ -223,6 +244,7 @@
         );
 
       -webkit-background-clip: text;
+
       background-clip: text;
 
       color: transparent;
@@ -240,7 +262,9 @@
       line-height: 1.7;
     }
 
-    /* Main card */
+    /* =========================
+       DASHBOARD
+       ========================= */
 
     .dashboard {
       display: grid;
@@ -258,6 +282,7 @@
       border: 1px solid var(--card-border);
 
       backdrop-filter: blur(20px);
+
       -webkit-backdrop-filter: blur(20px);
 
       border-radius: 25px;
@@ -265,7 +290,9 @@
       box-shadow: var(--shadow);
     }
 
-    /* Microphone panel */
+    /* =========================
+       MICROPHONE PANEL
+       ========================= */
 
     .mic-card {
       padding: 35px;
@@ -273,8 +300,11 @@
       min-height: 480px;
 
       display: flex;
+
       flex-direction: column;
+
       align-items: center;
+
       justify-content: center;
     }
 
@@ -285,6 +315,7 @@
       border-radius: 50%;
 
       display: grid;
+
       place-items: center;
 
       position: relative;
@@ -297,7 +328,8 @@
           transparent 66%
         );
 
-      border: 1px solid rgba(139,133,255,.2);
+      border:
+        1px solid rgba(139,133,255,.2);
     }
 
     .mic-ring::before,
@@ -308,9 +340,11 @@
 
       border-radius: 50%;
 
-      border: 1px solid rgba(108,99,255,.18);
+      border:
+        1px solid rgba(108,99,255,.18);
 
-      animation: pulse 3s infinite;
+      animation:
+        pulse 3s infinite;
     }
 
     .mic-ring::before {
@@ -329,12 +363,16 @@
 
       0% {
         opacity: .7;
-        transform: scale(.92);
+
+        transform:
+          scale(.92);
       }
 
       70% {
         opacity: 0;
-        transform: scale(1.08);
+
+        transform:
+          scale(1.08);
       }
 
       100% {
@@ -342,6 +380,10 @@
       }
 
     }
+
+    /* =========================
+       MICROPHONE BUTTON
+       ========================= */
 
     .mic-button {
       width: 110px;
@@ -367,15 +409,38 @@
       box-shadow:
         0 18px 45px rgba(108,99,255,.4);
 
-      transition: .25s;
+      transition:
+        transform .25s,
+        box-shadow .25s;
+
+      position: relative;
+
+      z-index: 2;
     }
 
     .mic-button:hover {
       transform: scale(1.06);
+
+      box-shadow:
+        0 20px 55px
+        rgba(108,99,255,.55);
     }
 
     .mic-button:active {
       transform: scale(.96);
+    }
+
+    .mic-button.active {
+      background:
+        linear-gradient(
+          145deg,
+          #25d98b,
+          #0fa968
+        );
+
+      box-shadow:
+        0 18px 45px
+        rgba(37,217,139,.35);
     }
 
     .mic-title {
@@ -394,10 +459,13 @@
       font-size: 13px;
     }
 
-    /* Waveform */
+    /* =========================
+       VISUALIZER
+       ========================= */
 
     .visualizer {
       width: 100%;
+
       height: 60px;
 
       margin-top: 25px;
@@ -425,23 +493,53 @@
           #a79fff
         );
 
-      animation: wave 1s ease-in-out infinite;
+      animation:
+        wave 1s
+        ease-in-out infinite;
 
-      animation-play-state: paused;
+      animation-play-state:
+        paused;
     }
 
-    .bar:nth-child(1) { animation-delay: .1s; }
-    .bar:nth-child(2) { animation-delay: .2s; }
-    .bar:nth-child(3) { animation-delay: .3s; }
-    .bar:nth-child(4) { animation-delay: .4s; }
-    .bar:nth-child(5) { animation-delay: .5s; }
-    .bar:nth-child(6) { animation-delay: .4s; }
-    .bar:nth-child(7) { animation-delay: .3s; }
-    .bar:nth-child(8) { animation-delay: .2s; }
-    .bar:nth-child(9) { animation-delay: .1s; }
+    .bar:nth-child(1) {
+      animation-delay: .1s;
+    }
+
+    .bar:nth-child(2) {
+      animation-delay: .2s;
+    }
+
+    .bar:nth-child(3) {
+      animation-delay: .3s;
+    }
+
+    .bar:nth-child(4) {
+      animation-delay: .4s;
+    }
+
+    .bar:nth-child(5) {
+      animation-delay: .5s;
+    }
+
+    .bar:nth-child(6) {
+      animation-delay: .4s;
+    }
+
+    .bar:nth-child(7) {
+      animation-delay: .3s;
+    }
+
+    .bar:nth-child(8) {
+      animation-delay: .2s;
+    }
+
+    .bar:nth-child(9) {
+      animation-delay: .1s;
+    }
 
     .visualizer.active .bar {
-      animation-play-state: running;
+      animation-play-state:
+        running;
     }
 
     @keyframes wave {
@@ -456,7 +554,9 @@
 
     }
 
-    /* Right panel */
+    /* =========================
+       AUDIO CONTROL
+       ========================= */
 
     .connection-card {
       padding: 30px;
@@ -478,106 +578,122 @@
       margin-bottom: 25px;
     }
 
-    .room-box {
-      padding: 22px;
+    /* Bluetooth box */
 
-      border-radius: 18px;
+    .device-box {
+      display: flex;
 
-      background: rgba(255,255,255,.035);
+      align-items: center;
 
-      border: 1px solid var(--card-border);
+      gap: 13px;
+
+      padding: 17px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.035);
+
+      border:
+        1px solid var(--card-border);
 
       margin-bottom: 20px;
     }
 
-    .room-label {
+    .device-icon {
+      width: 45px;
+      height: 45px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 12px;
+
+      background:
+        rgba(108,99,255,.12);
+
+      font-size: 22px;
+    }
+
+    .device-info strong {
+      display: block;
+
+      font-size: 14px;
+
+      margin-bottom: 4px;
+    }
+
+    .device-info span {
+      color: var(--muted);
+
       font-size: 11px;
 
-      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Information box */
+
+    .setup-box {
+      padding: 17px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.035);
+
+      border:
+        1px solid var(--card-border);
+
+      margin-bottom: 20px;
+    }
+
+    .setup-title {
+      color: #fff;
+
+      font-size: 12px;
+
+      font-weight: 700;
 
       text-transform: uppercase;
 
       letter-spacing: 1px;
 
-      margin-bottom: 8px;
+      margin-bottom: 13px;
     }
 
-    .room-code {
-      font-size: 34px;
+    .setup-item {
+      display: flex;
 
-      letter-spacing: 7px;
+      align-items: flex-start;
 
-      font-weight: 800;
+      gap: 9px;
 
-      color: #fff;
+      color: var(--muted);
 
-      word-break: break-all;
+      font-size: 12px;
+
+      line-height: 1.5;
+
+      margin-bottom: 9px;
     }
 
-    .copy-btn {
-      margin-top: 15px;
-
-      width: 100%;
-
-      padding: 11px;
-
-      border-radius: 10px;
-
-      border: 1px solid var(--card-border);
-
-      background: rgba(255,255,255,.05);
-
-      color: white;
-
-      cursor: pointer;
-
-      transition: .2s;
+    .setup-item:last-child {
+      margin-bottom: 0;
     }
 
-    .copy-btn:hover {
-      background: rgba(255,255,255,.09);
-    }
+    /* Stop button */
 
-    /* Input */
-
-    .input {
-      width: 100%;
-
-      padding: 15px;
-
-      border-radius: 12px;
-
-      border: 1px solid var(--card-border);
-
-      background: rgba(0,0,0,.25);
-
-      color: white;
-
-      outline: none;
-
-      font-size: 15px;
-
-      margin-bottom: 12px;
-    }
-
-    .input:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(108,99,255,.12);
-    }
-
-    /* Buttons */
-
-    .primary-btn,
-    .secondary-btn,
     .danger-btn {
-
       width: 100%;
 
       padding: 14px;
 
       border-radius: 12px;
 
-      border: none;
+      border:
+        1px solid
+        rgba(255,85,113,.18);
 
       cursor: pointer;
 
@@ -585,62 +701,31 @@
 
       font-size: 14px;
 
+      background:
+        rgba(255,85,113,.10);
+
+      color:
+        #ff7088;
+
       transition: .2s;
-
-      margin-bottom: 10px;
     }
 
-    .primary-btn {
-
+    .danger-btn:hover:not(:disabled) {
       background:
-        linear-gradient(
-          135deg,
-          var(--primary),
-          #817aff
-        );
-
-      color: white;
-
-      box-shadow:
-        0 10px 25px rgba(108,99,255,.25);
-    }
-
-    .primary-btn:hover {
-      transform: translateY(-2px);
-    }
-
-    .secondary-btn {
-
-      background:
-        rgba(255,255,255,.06);
-
-      border: 1px solid var(--card-border);
-
-      color: white;
-    }
-
-    .danger-btn {
-
-      background:
-        rgba(255,85,113,.1);
-
-      color: #ff7088;
-
-      border: 1px solid rgba(255,85,113,.18);
+        rgba(255,85,113,.18);
     }
 
     button:disabled {
       opacity: .45;
 
       cursor: not-allowed;
-
-      transform: none !important;
     }
 
-    /* Status */
+    /* =========================
+       STATUS
+       ========================= */
 
     .status {
-
       display: flex;
 
       align-items: center;
@@ -651,35 +736,40 @@
 
       border-radius: 12px;
 
-      background: rgba(255,255,255,.035);
+      background:
+        rgba(255,255,255,.035);
 
-      border: 1px solid var(--card-border);
+      border:
+        1px solid var(--card-border);
 
       color: var(--muted);
 
       font-size: 13px;
 
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .status-dot {
-
       width: 9px;
       height: 9px;
 
       border-radius: 50%;
 
       background: #737989;
+
+      flex-shrink: 0;
     }
 
     .status-dot.live {
-
-      background: var(--success);
+      background:
+        var(--success);
 
       box-shadow:
-        0 0 14px rgba(37,217,139,.8);
+        0 0 14px
+        rgba(37,217,139,.8);
 
-      animation: statusPulse 1.5s infinite;
+      animation:
+        statusPulse 1.5s infinite;
     }
 
     @keyframes statusPulse {
@@ -690,10 +780,11 @@
 
     }
 
-    /* Features */
+    /* =========================
+       FEATURES
+       ========================= */
 
     .features {
-
       display: grid;
 
       grid-template-columns:
@@ -705,14 +796,15 @@
     }
 
     .feature {
-
       padding: 20px;
 
       border-radius: 18px;
 
-      background: rgba(255,255,255,.035);
+      background:
+        rgba(255,255,255,.035);
 
-      border: 1px solid var(--card-border);
+      border:
+        1px solid var(--card-border);
     }
 
     .feature-icon {
@@ -735,10 +827,11 @@
       line-height: 1.5;
     }
 
-    /* Footer */
+    /* =========================
+       FOOTER
+       ========================= */
 
     footer {
-
       width: min(1100px, 92%);
 
       margin: 0 auto 30px;
@@ -757,7 +850,9 @@
       font-size: 12px;
     }
 
-    /* Mobile */
+    /* =========================
+       MOBILE
+       ========================= */
 
     @media (max-width: 800px) {
 
@@ -795,6 +890,7 @@
 
       .hero h1 {
         font-size: 42px;
+
         letter-spacing: -2px;
       }
 
@@ -827,21 +923,19 @@
         height: 95px;
       }
 
-      .room-code {
-        font-size: 27px;
-        letter-spacing: 5px;
-      }
-
     }
 
   </style>
+
 </head>
 
 
 <body>
 
 
-  <!-- NAVBAR -->
+  <!-- =========================
+       NAVBAR
+       ========================= -->
 
   <nav>
 
@@ -851,22 +945,27 @@
         🎙️
       </div>
 
-      <span>BT Mike</span>
+      <span>
+        BT Mike
+      </span>
 
     </div>
+
 
     <div class="nav-status">
 
       <span class="dot"></span>
 
-      WebRTC Ready
+      Ready
 
     </div>
 
   </nav>
 
 
-  <!-- MAIN -->
+  <!-- =========================
+       MAIN
+       ========================= -->
 
   <main>
 
@@ -879,27 +978,34 @@
         ⚡ Low Latency Audio
       </div>
 
+
       <h1>
         Wireless Microphone
       </h1>
 
+
       <p>
         Turn your phone or computer into a
-        wireless microphone and stream your
-        voice directly to another device.
+        wireless microphone and play your
+        voice through your Bluetooth speaker.
       </p>
 
     </section>
 
 
-    <!-- DASHBOARD -->
+    <!-- =========================
+         DASHBOARD
+         ========================= -->
 
     <section class="dashboard">
 
 
-      <!-- MICROPHONE -->
+      <!-- =========================
+           MICROPHONE
+           ========================= -->
 
       <div class="card mic-card">
+
 
         <div class="mic-ring">
 
@@ -907,6 +1013,7 @@
             id="startBtn"
             class="mic-button"
             title="Start Microphone"
+            type="button"
           >
             🎙️
           </button>
@@ -914,16 +1021,23 @@
         </div>
 
 
-        <div class="mic-title">
-          Microphone
+        <div
+          class="mic-title"
+          id="micTitle"
+        >
+          Microphone Ready
         </div>
 
-        <div class="mic-subtitle">
-          Tap to start broadcasting
+
+        <div
+          class="mic-subtitle"
+          id="micSubtitle"
+        >
+          Tap the microphone to start
         </div>
 
 
-        <!-- AUDIO VISUALIZER -->
+        <!-- VISUALIZER -->
 
         <div
           id="visualizer"
@@ -945,95 +1059,110 @@
       </div>
 
 
-      <!-- CONNECTION -->
+      <!-- =========================
+           AUDIO CONTROL
+           ========================= -->
 
       <div class="card connection-card">
 
+
         <h2 class="section-title">
-          Connection
+          Audio Control
         </h2>
 
+
         <p class="section-description">
-          Create a private room and connect
-          another device to receive your live
-          microphone audio.
+          Connect your Bluetooth speaker or
+          soundbar through your phone or
+          computer Bluetooth settings.
         </p>
 
 
-        <!-- ROOM -->
+        <!-- DEVICE -->
 
-        <div
-          id="roomBox"
-          class="room-box"
-          style="display:none;"
-        >
+        <div class="device-box">
 
-          <div class="room-label">
-            Your Room Code
+          <div class="device-icon">
+            🔊
           </div>
 
-          <div
-            id="roomCode"
-            class="room-code"
-          >
-            ------
-          </div>
 
-          <button
-            id="copyBtn"
-            class="copy-btn"
-          >
-            📋 Copy Room Code
-          </button>
+          <div class="device-info">
+
+            <strong>
+              Bluetooth Speaker
+            </strong>
+
+            <span>
+              Select your Bluetooth speaker
+              as the system audio output.
+            </span>
+
+          </div>
 
         </div>
 
 
-        <!-- CREATE -->
+        <!-- SETUP -->
 
-        <button
-          id="createRoomBtn"
-          class="primary-btn"
-        >
-          ✨ Create Microphone Room
-        </button>
+        <div class="setup-box">
+
+          <div class="setup-title">
+            Quick Setup
+          </div>
 
 
-        <div
-          style="
-            text-align:center;
-            color:#737989;
-            font-size:11px;
-            margin:8px 0 15px;
-          "
-        >
-          OR JOIN AN EXISTING ROOM
+          <div class="setup-item">
+
+            <span>
+              1️⃣
+            </span>
+
+            <span>
+              Connect your Bluetooth speaker
+              to your device.
+            </span>
+
+          </div>
+
+
+          <div class="setup-item">
+
+            <span>
+              2️⃣
+            </span>
+
+            <span>
+              Allow microphone permission
+              when your browser asks.
+            </span>
+
+          </div>
+
+
+          <div class="setup-item">
+
+            <span>
+              3️⃣
+            </span>
+
+            <span>
+              Tap the microphone button
+              to start.
+            </span>
+
+          </div>
+
         </div>
 
 
-        <!-- JOIN -->
-
-        <input
-          id="joinRoomInput"
-          class="input"
-          type="text"
-          placeholder="Enter Room Code"
-          maxlength="12"
-        >
-
-
-        <button
-          id="joinRoomBtn"
-          class="secondary-btn"
-        >
-          🔊 Join & Listen
-        </button>
-
+        <!-- STOP -->
 
         <button
           id="stopBtn"
           class="danger-btn"
           disabled
+          type="button"
         >
           ⛔ Stop Microphone
         </button>
@@ -1048,20 +1177,25 @@
             class="status-dot"
           ></span>
 
+
           <span id="status">
-            Ready to connect
+            Status: Disconnected
           </span>
 
         </div>
+
 
       </div>
 
     </section>
 
 
-    <!-- FEATURES -->
+    <!-- =========================
+         FEATURES
+         ========================= -->
 
     <section class="features">
+
 
       <div class="feature">
 
@@ -1074,8 +1208,8 @@
         </h3>
 
         <p>
-          Real-time audio streaming powered
-          by WebRTC.
+          Uses Web Audio for fast
+          microphone monitoring.
         </p>
 
       </div>
@@ -1084,16 +1218,16 @@
       <div class="feature">
 
         <div class="feature-icon">
-          🔒
+          🎙️
         </div>
 
         <h3>
-          Private Connection
+          Easy to Use
         </h3>
 
         <p>
-          Your microphone audio is streamed
-          directly between connected devices.
+          Allow microphone access and
+          press the microphone button.
         </p>
 
       </div>
@@ -1106,22 +1240,26 @@
         </div>
 
         <h3>
-          Works Anywhere
+          Mobile Friendly
         </h3>
 
         <p>
-          Use your phone, tablet or computer
-          as a wireless microphone.
+          Designed for phones, tablets
+          and desktop browsers.
         </p>
 
       </div>
 
+
     </section>
+
 
   </main>
 
 
-  <!-- FOOTER -->
+  <!-- =========================
+       FOOTER
+       ========================= -->
 
   <footer>
 
@@ -1129,102 +1267,199 @@
       © 2026 BT Mike
     </span>
 
+
     <span>
-      Wireless Audio • WebRTC
+      Wireless Audio • Web Microphone
     </span>
 
   </footer>
 
 
   <!-- =================================================
-       YOUR EXISTING FIREBASE / WEBRTC JAVASCRIPT
-       =================================================
-
-       IMPORTANT:
-
-       Keep your existing working JavaScript here.
-
-       Do NOT remove your Firebase/WebRTC code.
-
-       Only connect these UI IDs to your existing code:
-
-       startBtn
-       stopBtn
-       createRoomBtn
-       joinRoomBtn
-       joinRoomInput
-       roomCode
-       roomBox
-       status
-
+       MICROPHONE JAVASCRIPT
        ================================================= -->
-
 
   <script>
 
-    /*
-      UI helpers
+    let audioContext = null;
 
-      Use these functions from your existing
-      Firebase/WebRTC JavaScript.
-    */
+    let micStream = null;
+
+    let microphoneSource = null;
+
+
+    const startBtn =
+      document.getElementById("startBtn");
+
+
+    const stopBtn =
+      document.getElementById("stopBtn");
 
 
     const visualizer =
       document.getElementById("visualizer");
 
+
     const statusDot =
       document.getElementById("statusDot");
+
 
     const statusText =
       document.getElementById("status");
 
 
-    function setLiveUI(isLive) {
+    const micTitle =
+      document.getElementById("micTitle");
 
-      if (isLive) {
+
+    const micSubtitle =
+      document.getElementById("micSubtitle");
+
+
+    /* =========================
+       START MICROPHONE
+       ========================= */
+
+    async function startMicrophone() {
+
+      try {
+
+        /* Request microphone */
+
+        micStream =
+          await navigator.mediaDevices.getUserMedia({
+
+            audio: {
+
+              echoCancellation: false,
+
+              noiseSuppression: false,
+
+              autoGainControl: true
+
+            }
+
+          });
+
+
+        /* Create AudioContext */
+
+        audioContext =
+          new (
+            window.AudioContext ||
+            window.webkitAudioContext
+          )();
+
+
+        /* Resume AudioContext */
+
+        if (
+          audioContext.state === "suspended"
+        ) {
+
+          await audioContext.resume();
+
+        }
+
+
+        /* Create microphone source */
+
+        microphoneSource =
+          audioContext.createMediaStreamSource(
+            micStream
+          );
+
+
+        /*
+          Send microphone directly
+          to the system audio output.
+
+          If your computer/phone is connected
+          to a Bluetooth speaker and that speaker
+          is selected as the system output,
+          the microphone will play there.
+        */
+
+        microphoneSource.connect(
+          audioContext.destination
+        );
+
+
+        /* =========================
+           UPDATE UI
+           ========================= */
+
+        startBtn.disabled = true;
+
+        startBtn.classList.add("active");
+
+        stopBtn.disabled = false;
+
 
         visualizer.classList.add("active");
 
         statusDot.classList.add("live");
 
-      } else {
 
-        visualizer.classList.remove("active");
+        statusText.innerText =
+          "Status: Live • Microphone ON";
 
-        statusDot.classList.remove("live");
+
+        micTitle.innerText =
+          "Microphone is LIVE";
+
+
+        micSubtitle.innerText =
+          "Voice is playing through your audio output";
+
+
+      }
+
+      catch (error) {
+
+        console.error(error);
+
+
+        alert(
+          "Microphone access failed.\n\n" +
+          "Please allow microphone permission " +
+          "in your browser and try again."
+        );
 
       }
 
     }
 
 
-    /*
-      Copy Room Code
-    */
+    /* =========================
+       STOP MICROPHONE
+       ========================= */
 
-    document
-      .getElementById("copyBtn")
-      .addEventListener("click", async () => {
+    function stopMicrophone() {
 
-        const code =
-          document.getElementById("roomCode").innerText;
 
-        if (!code || code === "------") return;
+      /* Stop microphone */
+
+      if (micStream) {
+
+        micStream
+          .getTracks()
+          .forEach(
+            track => track.stop()
+          );
+
+        micStream = null;
+
+      }
+
+
+      /* Disconnect source */
+
+      if (microphoneSource) {
 
         try {
 
-          await navigator.clipboard.writeText(code);
-
-          document.getElementById("copyBtn").innerText =
-            "✓ Room Code Copied";
-
-          setTimeout(() => {
-
-            document.getElementById("copyBtn").innerText =
-              "📋 Copy Room Code";
-
-          }, 1500);
+          microphoneSource.disconnect();
 
         } catch (error) {
 
@@ -1232,56 +1467,89 @@
 
         }
 
-      });
+        microphoneSource = null;
+
+      }
+
+
+      /* Close AudioContext */
+
+      if (audioContext) {
+
+        try {
+
+          audioContext.close();
+
+        } catch (error) {
+
+          console.log(error);
+
+        }
+
+        audioContext = null;
+
+      }
+
+
+      /* =========================
+         RESET UI
+         ========================= */
+
+      startBtn.disabled = false;
+
+      startBtn.classList.remove("active");
+
+      stopBtn.disabled = true;
+
+
+      visualizer.classList.remove("active");
+
+      statusDot.classList.remove("live");
+
+
+      statusText.innerText =
+        "Status: Disconnected";
+
+
+      micTitle.innerText =
+        "Microphone Ready";
+
+
+      micSubtitle.innerText =
+        "Tap the microphone to start";
+
+    }
+
+
+    /* =========================
+       BUTTON EVENTS
+       ========================= */
+
+    startBtn.addEventListener(
+      "click",
+      startMicrophone
+    );
+
+
+    stopBtn.addEventListener(
+      "click",
+      stopMicrophone
+    );
 
 
     /*
-      Microphone button animation
-
-      IMPORTANT:
-      Connect this to your actual microphone
-      start function.
+      Make stopMicrophone available globally.
+      This is useful if Firebase authentication
+      is added later.
     */
 
-    document
-      .getElementById("startBtn")
-      .addEventListener("click", () => {
+    window.stopBtMikeMicrophone =
+      stopMicrophone;
 
-        setLiveUI(true);
-
-      });
-
-
-    /*
-      Stop button
-    */
-
-    document
-      .getElementById("stopBtn")
-      .addEventListener("click", () => {
-
-        setLiveUI(false);
-
-      });
-
-
-    /*
-      Example:
-
-      When your WebRTC connection becomes LIVE,
-      call:
-
-          setLiveUI(true);
-
-      When disconnected:
-
-          setLiveUI(false);
-
-    */
 
   </script>
 
 
 </body>
+
 </html>
-```
