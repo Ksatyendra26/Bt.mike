@@ -1,580 +1,72 @@
-<!-- Firebase Authentication -->
-<script type="module">
-
-  import { initializeApp }
-    from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
-
-  import {
-    getAuth,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    signInWithPhoneNumber,
-    RecaptchaVerifier,
-    signOut
-  } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-auth.js";
-
-
-  /* =========================================
-     FIREBASE CONFIGURATION
-     ========================================= */
-
-
-   const firebaseConfig = {
-  apiKey: "AIzaSyAhAtBmxdD_nN6o68OPUFzrvtofYFO24DA",
-  authDomain: "bt-mike.firebaseapp.com",
-  projectId: "bt-mike",
-  storageBucket: "bt-mike.firebasestorage.app",
-  messagingSenderId: "619510512801",
-  appId: "1:619510512801:web:f270dca58539a24f8ec4e0"
-};
-
-
-  /* =========================================
-     INITIALIZE FIREBASE
-     ========================================= */
-
-  const app = initializeApp(firebaseConfig);
-
-  const auth = getAuth(app);
-
-
-  /* =========================================
-     ELEMENTS
-     ========================================= */
-
-  const gate =
-    document.getElementById("authGate");
-
-  const userEmail =
-    document.getElementById("userEmail");
-
-  const msg =
-    document.getElementById("authMessage");
-
-
-  let confirmationResult = null;
-
-  let recaptchaVerifier = null;
-
-
-  window.btMikeAuthenticated = false;
-
-
-  /* =========================================
-     MESSAGE
-     ========================================= */
-
-  function showMessage(text, type) {
-
-    msg.textContent = text;
-
-    msg.className =
-      "auth-message show " + type;
-
-  }
-
-
-  /* =========================================
-     FIREBASE ERROR MESSAGE
-     ========================================= */
-
-  function getErrorMessage(error) {
-
-    switch (error.code) {
-
-      case "auth/invalid-credential":
-        return "Invalid email or password.";
-
-      case "auth/invalid-login-credentials":
-        return "Invalid email or password.";
-
-      case "auth/user-not-found":
-        return "No account found with this email.";
-
-      case "auth/wrong-password":
-        return "Incorrect password.";
-
-      case "auth/email-already-in-use":
-        return "This email is already registered.";
-
-      case "auth/invalid-email":
-        return "Please enter a valid email address.";
-
-      case "auth/weak-password":
-        return "Password must contain at least 6 characters.";
-
-      case "auth/too-many-requests":
-        return "Too many attempts. Please try again later.";
-
-      case "auth/invalid-phone-number":
-        return "Invalid mobile number.";
-
-      case "auth/quota-exceeded":
-        return "SMS quota exceeded. Please try again later.";
-
-      case "auth/operation-not-allowed":
-        return "This login method is not enabled in Firebase.";
-
-      case "auth/unauthorized-domain":
-        return "This website domain is not authorized in Firebase.";
-
-      case "auth/captcha-check-failed":
-        return "reCAPTCHA verification failed.";
-
-      case "auth/network-request-failed":
-        return "Network error. Please check your internet connection.";
-
-      default:
-        return error.message || "Something went wrong.";
-
-    }
-
-  }
-
-
-  /* =========================================
-     EMAIL / MOBILE TABS
-     ========================================= */
-
-  document
-    .getElementById("emailTab")
-    .addEventListener("click", function () {
-
-      document
-        .getElementById("emailTab")
-        .classList.add("active");
-
-      document
-        .getElementById("phoneTab")
-        .classList.remove("active");
-
-      document
-        .getElementById("emailAuthSection")
-        .classList.remove("auth-hidden");
-
-      document
-        .getElementById("phoneAuthSection")
-        .classList.add("auth-hidden");
-
-      showMessage("", "");
-
-    });
-
-
-  document
-    .getElementById("phoneTab")
-    .addEventListener("click", function () {
-
-      document
-        .getElementById("phoneTab")
-        .classList.add("active");
-
-      document
-        .getElementById("emailTab")
-        .classList.remove("active");
-
-      document
-        .getElementById("phoneAuthSection")
-        .classList.remove("auth-hidden");
-
-      document
-        .getElementById("emailAuthSection")
-        .classList.add("auth-hidden");
-
-      showMessage("", "");
-
-    });
-
-
-  /* =========================================
-     EMAIL LOGIN
-     ========================================= */
-
-  document
-    .getElementById("loginEmailBtn")
-    .addEventListener("click", async function () {
-
-      const email =
-        document
-          .getElementById("authEmail")
-          .value
-          .trim();
-
-      const password =
-        document
-          .getElementById("authPassword")
-          .value;
-
-
-      if (!email || !password) {
-
-        showMessage(
-          "Please enter your email and password.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web Microphone to Speaker</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; background: #121212; color: white; }
+    button { padding: 15px 30px; font-size: 18px; border: none; border-radius: 5px; cursor: pointer; background: #007bff; color: white; }
+    button:disabled { background: #555; }
+    .status { margin-top: 20px; font-weight: bold; color: #4CAF50; }
+  </style>
+</head>
+<body>
+
+  <h1>Wireless Web Microphone</h1>
+  <p>Connect your device to your Bluetooth Soundbar via system settings, then tap start.</p>
+  
+  <button id="startBtn">Turn Mic ON</button>
+  <button id="stopBtn" disabled>Turn Mic OFF</button>
+  
+  <div class="status" id="status">Status: Disconnected</div>
+
+  <script>
+    let audioContext;
+    let micStream;
+    let globalSource;
+
+    const startBtn = document.getElementById('startBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const statusText = document.getElementById('status');
+
+    startBtn.addEventListener('click', async () => {
       try {
+        // Request mic access with low latency settings
+        micStream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: false,
+            noiseSuppression: false,
+            autoGainControl: true,
+            latency: 0
+          }
+        });
 
-        showMessage(
-          "Signing in...",
-          "success"
-        );
+        // Initialize Web Audio Context
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        globalSource = audioContext.createMediaStreamSource(micStream);
+        
+        // Direct stream output to system speaker/Bluetooth destination
+        globalSource.connect(audioContext.destination);
 
-
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-
-      } catch (error) {
-
-        showMessage(
-          getErrorMessage(error),
-          "error"
-        );
-
+        startBtn.disabled = true;
+        stopBtn.disabled = false;
+        statusText.innerText = "Status: Live (Streaming to Soundbar)";
+      } catch (err) {
+        alert("Microphone Access Denied or Error: " + err.message);
       }
-
     });
 
-
-  /* =========================================
-     CREATE EMAIL ACCOUNT
-     ========================================= */
-
-  document
-    .getElementById("signupEmailBtn")
-    .addEventListener("click", async function () {
-
-      const email =
-        document
-          .getElementById("authEmail")
-          .value
-          .trim();
-
-      const password =
-        document
-          .getElementById("authPassword")
-          .value;
-
-
-      if (!email || !password) {
-
-        showMessage(
-          "Please enter an email and password.",
-          "error"
-        );
-
-        return;
-
+    stopBtn.addEventListener('click', () => {
+      if (micStream) {
+        micStream.getTracks().forEach(track => track.stop());
       }
-
-
-      if (password.length < 6) {
-
-        showMessage(
-          "Password must contain at least 6 characters.",
-          "error"
-        );
-
-        return;
-
+      if (audioContext) {
+        audioContext.close();
       }
-
-
-      try {
-
-        showMessage(
-          "Creating your account...",
-          "success"
-        );
-
-
-        await createUserWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-
-      } catch (error) {
-
-        showMessage(
-          getErrorMessage(error),
-          "error"
-        );
-
-      }
-
+      startBtn.disabled = false;
+      stopBtn.disabled = true;
+      statusText.innerText = "Status: Disconnected";
     });
-
-
-  /* =========================================
-     SEND MOBILE OTP
-     ========================================= */
-
-  document
-    .getElementById("sendOtpBtn")
-    .addEventListener("click", async function () {
-
-      const countryCode =
-        document
-          .getElementById("authCountryCode")
-          .value
-          .trim();
-
-      const phone =
-        document
-          .getElementById("authPhone")
-          .value
-          .trim();
-
-
-      if (!phone) {
-
-        showMessage(
-          "Please enter your mobile number.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      const fullPhone =
-        countryCode + phone;
-
-
-      try {
-
-        showMessage(
-          "Preparing OTP verification...",
-          "success"
-        );
-
-
-        /* Create reCAPTCHA */
-
-        if (!recaptchaVerifier) {
-
-          recaptchaVerifier =
-            new RecaptchaVerifier(
-              auth,
-              "recaptcha-container",
-              {
-                size: "normal"
-              }
-            );
-
-        }
-
-
-        await recaptchaVerifier.render();
-
-
-        /* Send OTP */
-
-        confirmationResult =
-          await signInWithPhoneNumber(
-            auth,
-            fullPhone,
-            recaptchaVerifier
-          );
-
-
-        document
-          .getElementById("otpArea")
-          .classList.remove("auth-hidden");
-
-
-        showMessage(
-          "OTP sent successfully. Please check your phone.",
-          "success"
-        );
-
-
-      } catch (error) {
-
-        showMessage(
-          getErrorMessage(error),
-          "error"
-        );
-
-
-        if (recaptchaVerifier) {
-
-          try {
-
-            recaptchaVerifier.clear();
-
-          } catch (_) {}
-
-          recaptchaVerifier = null;
-
-        }
-
-
-        document
-          .getElementById("recaptcha-container")
-          .innerHTML = "";
-
-      }
-
-    });
-
-
-  /* =========================================
-     VERIFY OTP
-     ========================================= */
-
-  document
-    .getElementById("verifyOtpBtn")
-    .addEventListener("click", async function () {
-
-      const otp =
-        document
-          .getElementById("authOtp")
-          .value
-          .trim();
-
-
-      if (!confirmationResult) {
-
-        showMessage(
-          "Please request an OTP first.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      if (!otp) {
-
-        showMessage(
-          "Please enter the OTP.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        showMessage(
-          "Verifying OTP...",
-          "success"
-        );
-
-
-        await confirmationResult.confirm(otp);
-
-
-      } catch (error) {
-
-        showMessage(
-          "Invalid OTP. Please check the OTP and try again.",
-          "error"
-        );
-
-      }
-
-    });
-
-
-  /* =========================================
-     LOGIN STATE
-     ========================================= */
-
-  onAuthStateChanged(
-    auth,
-    function (user) {
-
-      if (user) {
-
-        /* User logged in */
-
-        window.btMikeAuthenticated = true;
-
-
-        userEmail.textContent =
-          user.email ||
-          user.phoneNumber ||
-          "Signed-in user";
-
-
-        gate.classList.add("hidden");
-
-
-      } else {
-
-        /* User logged out */
-
-        window.btMikeAuthenticated = false;
-
-
-        userEmail.textContent =
-          "Not signed in";
-
-
-        gate.classList.remove("hidden");
-
-      }
-
-    }
-  );
-
-
-  /* =========================================
-     LOGOUT
-     ========================================= */
-
-  document
-    .getElementById("logoutBtn")
-    .addEventListener("click", async function () {
-
-      try {
-
-        if (
-          typeof window.stopBtMikeMicrophone ===
-          "function"
-        ) {
-
-          window.stopBtMikeMicrophone();
-
-        }
-
-
-        await signOut(auth);
-
-
-        showMessage(
-          "You have been logged out.",
-          "success"
-        );
-
-
-      } catch (error) {
-
-        alert(
-          "Logout failed: " +
-          error.message
-        );
-
-      }
-
-    });
-
-</script>
+  </script>
+</body>
+</html>
